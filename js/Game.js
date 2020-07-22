@@ -9,8 +9,8 @@ class Game {
         this.activePhrase = null;
     }
     /**
-    * Creates phrases for use in game
-    * @return {array} An array of phrases that could be used in the game
+     * Creates phrases for use in game
+     * @return {array} An array of phrases that could be used in the game
     */
     createPhrases() {
         const phrasesArr = [];
@@ -24,15 +24,15 @@ class Game {
 
     
     /**
-    * Selects random phrase from phrases property
-    * @return {Object} Phrase object chosen to be used
+     * Selects random phrase from phrases property
+     * @return {Object} Phrase object chosen to be used
     */
     getRandomPhrase() {
         return this.phrases[Math.floor(Math.random() * (this.phrases.length))];
     };    
 
     /**
-    * Begins game by selecting a random phrase and displaying it to user
+     * Begins game by selecting a random phrase and displaying it to user
     */
     startGame() {
         document.querySelector('#overlay').style.display = 'none';
@@ -40,4 +40,8 @@ class Game {
         this.activePhrase.addPhraseToDisplay();
     };
 
+    // Logic and branching of the user interaction to the game
+    handleInteraction() {
+
+    }
 }

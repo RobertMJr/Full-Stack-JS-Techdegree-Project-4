@@ -8,7 +8,7 @@
     }
 
     /**
-    * Display phrase on a game board
+     * Display phrase on a game board
     */
     addPhraseToDisplay() {
         const unorderedList = document.querySelector('ul');
@@ -26,6 +26,28 @@
                 unorderedList.appendChild(listItem);
             }
         })
+    }
+
+    /**
+     * Checks if passed letter is in phrase
+     * @param (string) letter - Letter to check
+     */    
+    checkLetter(letter) {
+        return this.phrase.includes(letter);
+    }
+
+    /**
+     * Displays passed letter on screen after a match is found
+     * @param (string) letter - Letter to display
+     */
+    showMatchedLetter(letter) {
+        const ulChildren = document.querySelector('ul').children;
+        for (let i = 0; i < ulChildren.length; i += 1) {
+            if (ulChildren[i].className.slice(-1) === letter) {
+                ulChildren[i].classList.remove('hide');
+                ulChildren[i].classList.add('show');
+            }
+        }
     }
 
 
