@@ -43,12 +43,11 @@
     showMatchedLetter(letter) {
         const ulChildren = document.querySelector('ul').children;
         for (let i = 0; i < ulChildren.length; i += 1) {
-            if (ulChildren[i].className.slice(-1) === letter) {
+            if (ulChildren[i].className.slice(-1) === letter && ulChildren[i].className !== 'space') {
                 ulChildren[i].classList.remove('hide');
                 ulChildren[i].classList.add('show');
             }
         }
     }
-
 
  }

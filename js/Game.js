@@ -40,8 +40,75 @@ class Game {
         this.activePhrase.addPhraseToDisplay();
     };
 
-    // Logic and branching of the user interaction to the game
-    handleInteraction() {
+    /**
+     * Checks for winning move 
+     * @return {boolean} True if game has been won, false if game wasn't won
+     */
+    checkForWin() {
+        return [...document.querySelector('ul').children].filter(item => item.className !== 'space').every(elem => [...elem.classList].includes('show'));
+    }
 
+    /**
+     * Increases the value of the missed property
+     * Removes a life from the scoreboard
+     * Checks if player has remaining lives and ends game if player is out
+     */
+    removeLife() {
+        [...document.querySelector('ol').children][this.missed].firstElementChild.setAttribute('src', "images/lostHeart.png");
+        this.missed += 1;
+        if (this.missed === 5) {
+            this.gameOver(false);
+            this.resetBoard();
+        }
+    }
+
+    /**
+     * Displays game over message
+     * @param {boolean} gameWon - Whether or not the user won the game
+     */
+    gameOver(gameWon) {
+        if (gameWon){
+            document.querySelector('#overlay').style.display = '';
+            document.querySelector('.start').className = 'win';
+            document.querySelector('#game-over-message').innerHTML = 'Congratulations! You won!';
+        } else {
+            document.querySelector('#overlay').style.display = '';
+            document.querySelector('.start').className = 'lose';
+            document.querySelector('#game-over-message').innerHTML = 'Sorry, better luck next time!';
+        }
+    }
+
+    /**
+     * Handles on screen keyboard button clicks 
+     * @param {HTMLButtonElement} button - The clicked button element
+     */
+    handleInteraction(button) {
+        button.disabled = true;
+        if (!this.activePhrase.checkLetter(button.innerHTML)){
+            button.classList.add('wrong');
+            this.removeLife();
+        } else {
+            button.classList.add('chosen');
+            this.activePhrase.showMatchedLetter(button.innerHTML);
+            if(this.checkForWin()){
+                this.gameOver(true);
+                this.resetBoard();
+            }
+        }
+    }
+
+    /**
+     * Resets the board  by
+     * removing al li elements from the Phrase 'ul' element
+     * enabling all the onscreen keyboard buttons and removing their 'chosen'/ 'wrong' class
+     * resetting the heart images
+     */
+    resetBoard(){
+        let ulLastChild = document.querySelector('ul').lastElementChild;
+        while (ulLastChild) {
+            document.querySelector('ul').removeChild(ulLastChild);
+            ulLastChild = document.querySelector('ul').lastElementChild;
+        }
+        
     }
 }
