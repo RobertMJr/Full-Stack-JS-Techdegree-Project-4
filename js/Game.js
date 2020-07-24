@@ -13,13 +13,8 @@ class Game {
      * @return {array} An array of phrases that could be used in the game
     */
     createPhrases() {
-        const phrasesArr = [];
         const listOfPhrases = ['Life is like a box of chocolates', 'Until we meet again', 'I am what I am', 'More power to you', 'Hitch Your Wagon to a Star'];
-        for(let i = 0; i < 5; i += 1){
-            let phraseObject = new Phrase(listOfPhrases[i]);
-            phrasesArr.push(phraseObject);
-        }
-        return phrasesArr;
+        return listOfPhrases.map(phraseItem => new Phrase(phraseItem));
     };
 
     
@@ -69,11 +64,11 @@ class Game {
     gameOver(gameWon) {
         if (gameWon){
             document.querySelector('#overlay').style.display = '';
-            document.querySelector('.start').className = 'win';
+            document.querySelector('#overlay').className = 'win';
             document.querySelector('#game-over-message').innerHTML = 'Congratulations! You won!';
         } else {
             document.querySelector('#overlay').style.display = '';
-            document.querySelector('.start').className = 'lose';
+            document.querySelector('#overlay').className = 'lose';
             document.querySelector('#game-over-message').innerHTML = 'Sorry, better luck next time!';
         }
     }
@@ -104,11 +99,13 @@ class Game {
      * resetting the heart images
      */
     resetBoard(){
-        let ulLastChild = document.querySelector('ul').lastElementChild;
-        while (ulLastChild) {
-            document.querySelector('ul').removeChild(ulLastChild);
-            ulLastChild = document.querySelector('ul').lastElementChild;
-        }
-        
+        document.querySelector('#phrase ul').innerHTML = '';
+        document.querySelectorAll('.keyrow > button').forEach(button => {
+            button.disabled = false;
+            button.className = 'key';
+        })
+        document.querySelectorAll('.tries img').forEach(liElement => {
+            liElement.setAttribute('src', "images/liveHeart.png");
+        })
     }
 }
