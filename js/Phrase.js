@@ -2,7 +2,7 @@
  * Project 4 - OOP Game App
  * Phrase.js */
 
- class Phrase {
+class Phrase {
     constructor(phrase) {
         this.phrase = phrase.toLowerCase();   
     }
@@ -41,13 +41,11 @@
      * @param (string) letter - Letter to display
      */
     showMatchedLetter(letter) {
-        const ulChildren = document.querySelector('ul').children;
-        for (let i = 0; i < ulChildren.length; i += 1) {
-            if (ulChildren[i].className.slice(-1) === letter && ulChildren[i].className !== 'space') {
-                ulChildren[i].classList.remove('hide');
-                ulChildren[i].classList.add('show');
+        document.querySelectorAll('ul > li').forEach(liElement => {
+            if(liElement.className.slice(-1) === letter && liElement.className !== 'space'){
+                liElement.classList.remove('hide');
+                liElement.classList.add('show');
             }
-        }
+        })
     }
-
- }
+}

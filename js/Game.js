@@ -108,4 +108,14 @@ class Game {
             liElement.setAttribute('src', "images/liveHeart.png");
         })
     }
+
+    /** 
+     * Identifies the element from the on-screen keyboard that corresponds to the pressed key on the physical keyboard and returns it
+     * @param {event.key} key - The key that was pressed on the keyboard
+     * @return {HTMLButtonElement} - The button corresponding to the key that was pressed
+     */ 
+    keyboardToButton(key) {
+       const buttonArr = ([...document.querySelectorAll('.keyrow > button')].filter(button => button.textContent === key));
+       return buttonArr[0];
+    }
 }
