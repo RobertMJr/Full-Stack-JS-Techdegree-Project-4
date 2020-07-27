@@ -78,6 +78,9 @@ class Game {
      * @param {HTMLButtonElement} button - The clicked button element
      */
     handleInteraction(button) {
+        if(button.disabled === true){
+            return;
+        }
         button.disabled = true;
         if (!this.activePhrase.checkLetter(button.innerHTML)){
             button.classList.add('wrong');

@@ -12,7 +12,6 @@ document.querySelector('#btn__reset').addEventListener('click', event => {
 // Event listener for the on-screen keyboard 
 document.querySelector('#qwerty').addEventListener('click', event => {
    if(event.target.matches('button')){
-      console.log(event.target);
       game.handleInteraction(event.target);
    } 
 })
