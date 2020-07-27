@@ -3,7 +3,7 @@
  * app.js */
 
 let game;
-// Event listener for starting the game
+// Event listener for starting the game once the start button is clicked
 document.querySelector('#btn__reset').addEventListener('click', event => {
    game = new Game();
    game.startGame();   
@@ -16,9 +16,11 @@ document.querySelector('#qwerty').addEventListener('click', event => {
    } 
 })
 
-// Event listener for physical keyboard
-document.querySelector('body').addEventListener('keyup', event => {
-   if(event.keyCode >= 65 && event.keyCode <= 90) {
-      game.handleInteraction(game.keyboardToButton(event.key));
+// Event listener for the physical keyboard
+document.addEventListener('keydown', event => {
+   if(document.querySelector('#overlay').style.display ==='none'){
+      if(event.keyCode >= 65 && event.keyCode <= 90) {
+         game.handleInteraction(game.keyboardToButton(event.key));
+      }
    }
 })
